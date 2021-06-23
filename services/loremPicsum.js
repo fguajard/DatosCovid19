@@ -8,4 +8,4 @@ class LoremPicsumServices {
 }
 module.exports = {
     LoremPicsumServices
-}
+} 

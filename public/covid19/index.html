@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Covid19</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="images/icons/favicon.ico" />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="vendor/bootstrap/css/bootstrap.min.css"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="fonts/font-awesome-4.7.0/css/font-awesome.min.css"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="fonts/iconic/css/material-design-iconic-font.min.css"
+    />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css" />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="vendor/css-hamburgers/hamburgers.min.css"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="vendor/animsition/css/animsition.min.css"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="vendor/select2/select2.min.css"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="vendor/daterangepicker/daterangepicker.css"
+    />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="css/util.css" />
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <!--===============================================================================================-->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+      integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <!--===============================================================================================-->
+    <link
+      href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css"
+      rel="stylesheet"
+    />
+    <!--===============================================================================================-->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.css">
+    <!--===============================================================================================-->
+
+  </head>
+  <body>
+    <section class="NavBar">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">    
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li class="nav-item active">
+            <a class="nav-link" href="#"><i class="fa fa-home fa-3x text-info" id="home"></i></a>
+          </li>          
+        </ul>
+        <div class="form-inline my-2 my-lg-0">
+          <button class="btn d-none btn-info my-2 my-sm-0 mx-2" id="datosChile">Datos Chile</button>          
+          <button class="btn btn-info my-2 my-sm-0" data-toggle="modal" data-target="#modalLogin" id="loginButton">Log In</button>
+          <button class="btn d-none btn-info my-2 my-sm-0 mx-2" id="cerrarSesion">Cerrar Sesion</button>
+        </div>
+      </div>
+    </nav>
+  </section>
+  
+  <section class="Main p-t-75">
+    <div
+      class="container-login100"
+      style="background-image: url('images/background2.jpg')"
+    >
+    <h1 class="text-center login100-form-title fs-40 text-white"> DATOS COVID 19</h1>
+          <!-- Grafico  -->
+      <div class="row w-100 p-t-30 p-b-30">
+        <div class="col-12 col-sm-12">
+          <!-- GRAFICO -->
+          <div class="wrap-login100 p-t-30 p-b-30">
+            <canvas id="myChart" width="100%" height="45px"></canvas>
+            <canvas id="myChart2" width="100%" height="40px" style="display: none;"></canvas>
+            <!-- <img src="./images/Spinner.gif" class="w-100" style="display: none;" id="spinner"> -->  
+            
+          </div>
+        </div>
+        <!-- <div class="col-12 col-sm-4">
+          <div class="wrap-login100 p-t-30 p-b-30">
+            
+            <div id='calendar' width="100%" height="40px"></div>
+          </div>
+        </div> -->
+      </div>
+      <!-- End Row -->
+
+      <!-- Tabla -->
+      <div class="col-12">
+        <div class="wrap-login100 p-t-30 p-b-30" id="divTable">
+          <div id="wrapper"></div>
+        </div>
+      </div>
+      <!-- End Row -->
+    </div>
+  </section>
+
+    <!-- Modal  Pais-->
+    <section class="ModalPais">    
+    <div
+      class="modal fade"
+      id="exampleModalCenter"
+      tabindex="-1"     
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalTitle"></h5>           
+          </div>
+          <div class="modal-body">
+            <canvas id="chartModal" width="100%" height="40px"></canvas>
+          </div>
+          <div class="modal-footer">           
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <!-- Modal Login -->
+    <section class="ModalLogin">    
+      <div
+        class="modal fade"
+        id="modalLogin"
+        tabindex="-1"     
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">              
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+
+              <div class="wrap-login100 p-l-55 p-r-55 p-t-30 p-b-30">
+                <form class="login100-form" id="formularioLogin">
+                  <span class="login100-form-title p-b-37 fs-30 text-info">
+                    Log In
+                  </span>
+          
+                  <div class="wrap-input100 validate-input m-b-20" data-validate="Enter username or email">
+                    <input class="input100 text-info" type="text" name="username" placeholder="username or email" id="usuarioLogin">
+                    <span class="focus-input100 text-info"></span>
+                  </div>
+          
+                  <div class="wrap-input100 validate-input m-b-25" data-validate = "Enter password">
+                    <input class="input100 text-info" type="password" name="pass" placeholder="password" id="contraseñaLogin">
+                    <span class="focus-input100"></span>
+                  </div>
+          
+                  <div class="container-login100-form-btn">
+                    <button class="login100-form-btn bg-info">
+                      Sign In
+                    </button>
+                  </div>                 
+                </form>               
+              </div>             
+            </div>            
+          </div>
+        </div>
+
+      </div>
+    </section>
+  
+
+    <!--===============================================================================================-->
+    <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/animsition/js/animsition.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/bootstrap/js/popper.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/select2/select2.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/daterangepicker/moment.min.js"></script>
+    <script src="vendor/daterangepicker/daterangepicker.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/countdowntime/countdowntime.js"></script>
+    <!--===============================================================================================-->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!--===============================================================================================-->
+    <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
+
+    <script defer src="js/script.js" type="module"></script>
+  </body>
+</html>
